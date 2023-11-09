@@ -3,9 +3,28 @@ kind: PersistentVolumeClaim
 metadata:
   name: mypvc
 spec:
-  storageClassName: longhorn
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 300Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mywebserver
+spec:
+  volumes:
+    - name: public
+      persistentVolumeClaim:
+        claimName: mypvc
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: public

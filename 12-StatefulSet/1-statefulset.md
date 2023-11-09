@@ -16,5 +16,6 @@ kubectl get pods,pv,pvc
 ```s
 kubectl apply -f headless-service.yaml
 kubectl get svc
+curl web-1.nginx.default.svc.cluster.local:80
 # Do a curl request for headless service using some busybox pod.
 ```

@@ -9,11 +9,9 @@ $ kubectl create -f empty-dir.yaml
 # create 2 verticle split pane for showcase 2 container commands side by side
 
 $ kubectl exec empty-dir -c c1 -it -- bash
-$ mount | grep html
 $ tail -f /usr/share/nginx/html/index.html
 
 $ kubectl exec empty-dir -c c2 -it -- bash
-$ mount | grep html
 $ tail -f /html/index.html
 
 $ kubectl delete pod empty-dir
@@ -60,9 +58,7 @@ $ kubectl get pvc
 
 # /home/vagrant/k8svolumes/mypv
 # goto each node and create folder and file
-$ echo "Node 1" > index.html
-$ echo "Node 2" > index.html
-$ echo "Node 3" > index.html
+$ echo "Colima" > index.html
 
 $ kubectl apply -f pvc.yaml
 $ kubectl apply -f pv.yaml
@@ -82,7 +78,7 @@ $ kubectl get pvc
 # delete all to go in reverse order
 $ kubectl delete pod mywebserver
 $ kubectl delete pvc mypvc
-$ kubectl delete pv mypv
+$ kubectl delete pv mypv3
 
 # try and create PVC first
 $ kubectl apply -f pvc.yaml
@@ -90,22 +86,21 @@ $ kubectl apply -f pvc.yaml
 $ kubectl apply -f pv.yaml
 # request fullfilled
 
+#Try deleting pv first it would't because of Finalizers
+k delete pv
+kubectl patch pv mypv3 -p '{"metadata": {"finalizers": null}}'
+k get pv
+k get pvc 
+k delete pvc mypvc
+
 ```
 
 # Storage Class
-
-# minikube
 ```s
+cd storage-class
+$ kubectl apply -f pvc-sc.yaml
 $ kubectl get sc
-$ kubectl describe sc standard
-$ kubectl apply -f sc-pvc.yaml
 $ kubectl describe pv pvc
-
-$ minikube ssh
-$ cd /tmp/hostpath-provisioner/
-$ kubectl apply -f sc-pod.yaml
-$ kubectl port-forward pod/pod-sc 8080:80
-
 ```
 
 # digital ocean

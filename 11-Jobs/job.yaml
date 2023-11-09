@@ -8,6 +8,6 @@ spec:
       containers:
         - name: test-container
           image: curlimages/curl
-          command: ["/bin/sh", "-c", "echo 'I am doing my job'; ls -al; sleep 5"]
+          command: ["/bin/sh", "-c", "echo 'I am doing my job'; ls -al; sleep 2"]
       restartPolicy: OnFailure
   backoffLimit: 4

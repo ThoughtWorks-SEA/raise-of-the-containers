@@ -7,7 +7,7 @@ spec:
     - name: html
       hostPath:
         path: /home/vagrant/nginx/html
-        type: Directory
+        type: DirectoryOrCreate
   containers:
     - name: c1
       image: nginx

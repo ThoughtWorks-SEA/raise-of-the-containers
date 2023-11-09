@@ -10,9 +10,13 @@ $ kubectl apply -f dobby-pod.yaml
 $ kubectl exec dobby -it -- sh
     $ env
 
-$ kubeclt apply -f dobby-full-configmap-as-env.yaml
+$ kubectl apply -f dobby-full-configmap-as-env.yaml
 $ kubectl exec dobby -it -- sh
     $ env
+    
+$ k edit cm dobby-config
+$ kubectl exec dobby -it -- sh
+$ $ env
 ```
 
 ### configmap as file and file mounted using volume
@@ -23,6 +27,9 @@ $ kubectl describe configmap test-config-from-file
 $ kubectl create configmap test-config-from-file --from-file test.properties -o yaml --dry-run=client | kubectl replace -f -
 
 $ kubectl apply -f test-pod-configmap-as-volume.yaml
+
+kubectl exec test-pod -it -- sh
+cd /etc/config
 ```
 
 
