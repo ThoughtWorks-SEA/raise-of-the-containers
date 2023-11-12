@@ -11,7 +11,7 @@ spec:
         maxUnavailable: 10% 
   selector:
     matchLabels:
-      app: dobby-pod  
+      app: dobby-pod
   template:
     metadata:
       labels:
