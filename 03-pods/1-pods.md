@@ -6,11 +6,12 @@
 $ watch kubectl get pods -o wide
 
 # go through the descriptor file
-# explain the status changes
 $ kubectl apply -f dobby.yaml
 
+# notice the status changes
+
 # explain the different events
-$ kubeclt describe pod dobby
+$ kubectl describe pod dobby
 ```
 
 ### Pod Lifecycle
@@ -19,14 +20,16 @@ $ kubeclt describe pod dobby
 $ kubectl logs -f dobby
 
 # trigger pod to restart by calling dobby app's /control/crash endpoint
+
 # either use port-forwarding
 $ kubectl port-forward dobby 4444:4444
 $ curl -i -X PUT localhost:4444/control/crash
+
 # or ssh into colima node
 $ colima ssh
 $ curl -i -X PUT 10.42.0.44:4444/control/crash
 
-# notice STATUS and RESTART count, and logs
+# notice status, restart count, and logs
 ```
 
 ### Manage Pod (Env Var)
@@ -45,7 +48,7 @@ $ kubectl exec dobby -it -- bash
 ### Multi container Pod (Shared Volume)
 ```s
 # go through the descriptor file regarding volume mounts
-# in particular, go through the command that appends date
+# note the command that appends date in 2nd container
 $ kubectl apply -f multi-container.yaml
 
 # notice READY column 2/2 - whereas other pods are 1/1
