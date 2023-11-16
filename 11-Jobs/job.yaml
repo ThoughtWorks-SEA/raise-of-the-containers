@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: test-job
 spec:
+  # ttlSecondsAfterFinished: 3
   template:
     spec:
       containers:
