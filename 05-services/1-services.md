@@ -39,7 +39,7 @@ $ kubectl delete svc dobby-svc
 $ kubectl apply -f dobby-svc-nodeport.yaml
 
 # explain that NodePort exposes services to access outside of the cluster
-# hence can use localhost or can use colima ip (192.168.106.10) if network-address is enabled
+# hence can use localhost or can use colima ip (by running `colima list`) if --network-address is enabled
 $ while true; do sleep 2; curl "localhost:30003/meta"; echo -e '    '$(date);done
 ```
 
