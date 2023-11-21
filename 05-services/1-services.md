@@ -52,6 +52,17 @@ $ kubectl run curl -it --rm --image=pstauffer/curl
 $ curl http://dobby-svc-np:4444/meta
 
 # note that the pod was able to resolve the name
-# explain that coredns pods is a DNS server to resolve service names 
-$ kubectl get pods -n kube-system
+# this is because of coredns pod, which acts as a DNS server
+
+# show that the curl pod is pointing to a nameserver IP
+$ cat /etc/resolv.conf
+
+# show that the nameserver IP is the cluster IP of kube-dns service
+$ kubectl get service -n kube-system
+
+# show that the kube-dns service forwards traffic to some endpoints
+$ kubectl get endpoints -n kube-system
+
+# show that the endpoints correspond to the coredns pod IP
+$ kubectl get pods -n kube-system -o wide
 ```
